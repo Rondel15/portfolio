@@ -1,0 +1,60 @@
+.page {
+  padding: 5rem 2rem;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 4rem;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  margin-bottom: 1rem;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.sub {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  max-width: 480px;
+}
+
+.group {
+  margin-bottom: 3.5rem;
+}
+
+.groupLabel {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .page { padding: 3rem 1.25rem; }
+}

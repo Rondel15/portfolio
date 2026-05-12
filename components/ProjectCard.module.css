@@ -1,0 +1,117 @@
+.card {
+  display: block;
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.cardInner {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.category {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+  font-weight: 500;
+}
+
+.category[data-color="orange"] {
+  background: #fff3e0;
+  color: #e65100;
+}
+.category[data-color="blue"] {
+  background: #e3f2fd;
+  color: #0d47a1;
+}
+.category[data-color="cyan"] {
+  background: #e0f7fa;
+  color: #006064;
+}
+.category[data-color="green"] {
+  background: #e8f5e9;
+  color: #1b5e20;
+}
+
+[data-theme="dark"] .category[data-color="orange"] {
+  background: rgba(230, 81, 0, 0.2);
+  color: #ffb74d;
+}
+[data-theme="dark"] .category[data-color="blue"] {
+  background: rgba(13, 71, 161, 0.2);
+  color: #64b5f6;
+}
+[data-theme="dark"] .category[data-color="cyan"] {
+  background: rgba(0, 96, 100, 0.2);
+  color: #4dd0e1;
+}
+[data-theme="dark"] .category[data-color="green"] {
+  background: rgba(27, 94, 32, 0.2);
+  color: #81c784;
+}
+
+.arrow {
+  color: var(--text-muted);
+  transition: transform var(--transition), color var(--transition);
+}
+
+.card:hover .arrow {
+  transform: translate(3px, -3px);
+  color: var(--accent);
+}
+
+.title {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.tag {
+  font-size: 0.72rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 100px;
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
