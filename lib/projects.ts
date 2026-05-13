@@ -96,7 +96,7 @@ export const projects: Project[] = [
       "Overcomes Fastly 503 timeout limitations",
       "Consumer-based architecture for scalable processing",
     ],
-    featured: false,
+    featured: true,
   },
   {
     slug: "combination-pricing",
@@ -113,7 +113,7 @@ export const projects: Project[] = [
       "Sydney timezone-aware scheduling",
       "Custom admin UI with raw select elements and _toHtml()",
     ],
-    featured: false,
+    featured: true,
   },
   {
     slug: "nextjs-portfolio",
@@ -130,7 +130,7 @@ export const projects: Project[] = [
       "Fully responsive with mobile-first design",
       "Static generation for optimal performance",
     ],
-    liveUrl: "https://yourportfolio.vercel.app",
+    liveUrl: "https://portfolio-roan-ten-23.vercel.app/",
     repoUrl: "https://github.com/yourusername/portfolio",
     featured: true,
   },
