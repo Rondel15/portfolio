@@ -13,6 +13,41 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "digidirect-algolia-search",
+    title: "Algolia InstantSearch Customisation",
+    description:
+      "Deep customisation of Algolia InstantSearch on a high-traffic Adobe Commerce storefront, covering PLP behaviour, faceting, and add-to-cart UX.",
+    longDescription:
+      "Extended the default Algolia Magento 2 integration with a suite of frontend fixes and enhancements. Work spanned delegated event handling for seamless add-to-cart without page reloads, a MutationObserver-based sidebar collapse toggle, dynamic facet placeholder injection via a PHP plugin, and a PDP add-to-cart button recovery mechanism using a MutationObserver with setInterval polling fallback.",
+    tags: ["Algolia", "InstantSearch", "Magento 2", "JavaScript", "PHP", "Knockout.js"],
+    category: "magento",
+    highlights: [
+      "Delegated submit handler in tes-listing.phtml fixing add-to-cart without page reload on PLP",
+      "MutationObserver sidebar collapse/expand toggle with is-collapsed CSS class binding",
+      "PHP plugin injecting per-facet placeholder text into algoliaConfig.translations at runtime",
+      "PDP add-to-cart button recovery via MutationObserver with setInterval polling safety net",
+    ],
+    featured: true,
+  },
+
+  {
+    slug: "digidirect-particular-audience",
+    title: "Particular Audience Recommendations Integration",
+    description:
+      "End-to-end integration of Particular Audience personalised product recommendations into Adobe Commerce, with a custom AJAX proxy and frontend widget.",
+    longDescription:
+      "Implemented a full-stack PA recommendations integration comprising a backend controller acting as an AJAX proxy to the PA API and a frontend pa-widget.phtml template rendering personalised carousels. Ongoing work included campaign class injection, a double-encoded URL entity fix via html_entity_decode and escapeJs, and Owl Carousel/Slick Slider fixes for nav repositioning, two-finger swipe support via MutationObserver, and a trackpad multi-slide jumping fix using an accumulative deltaX threshold.",
+    tags: ["Particular Audience", "Magento 2", "PHP", "JavaScript", "Owl Carousel"],
+    category: "magento",
+    highlights: [
+      "Backend AJAX proxy controller forwarding requests to the PA personalisation API",
+      "pa-widget.phtml template with campaign class injection and escapeJs entity fix",
+      "Owl Carousel nav repositioned to body with PA widget exclusion logic",
+      "Trackpad multi-slide fix via accumulative deltaX threshold in Slick Slider handler",
+    ],
+    featured: false,
+  },
+  {
     slug: "digidirect-click-collect",
     title: "Click & Collect Module",
     description:
