@@ -114,7 +114,8 @@ export const projects: Project[] = [
       "Clean, accessible chat UI with user and AI message bubbles",
       "Error handling and loading states for smooth UX",
     ],
-    repoUrl: "https://github.com/yourusername/ai-powered-chat",
+    liveUrl: "https://ai-chat-ivory-six.vercel.app/",
+    repoUrl: "https://github.com/Rondel15/ai-chat",
     featured: true,
   },
   {
@@ -132,7 +133,8 @@ export const projects: Project[] = [
       "Live presence indicators — see who's online in each room",
       "Event-driven Node.js architecture for high concurrency",
     ],
-    repoUrl: "https://github.com/yourusername/node-chat-app",
+    liveUrl: "https://chat-app-client-s9cj.onrender.com/",
+    repoUrl: "https://github.com/Rondel15/chat-app",
     featured: true,
   },
   {
@@ -151,7 +153,8 @@ export const projects: Project[] = [
       "Server components for SSR + client components for interactivity",
       "Prisma ORM with PostgreSQL for type-safe database access",
     ],
-    repoUrl: "https://github.com/yourusername/social-media-app",
+    liveUrl: "https://social-app-henna-tau.vercel.app/",
+    repoUrl: "https://github.com/Rondel15/social-app",
     featured: true,
   },
 ];
