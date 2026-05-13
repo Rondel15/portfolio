@@ -45,7 +45,7 @@ export const projects: Project[] = [
       "Owl Carousel nav repositioned to body with PA widget exclusion logic",
       "Trackpad multi-slide fix via accumulative deltaX threshold in Slick Slider handler",
     ],
-    featured: false,
+    featured: true,
   },
   {
     slug: "digidirect-click-collect",
