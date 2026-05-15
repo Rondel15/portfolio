@@ -29,7 +29,6 @@ export const projects: Project[] = [
     ],
     featured: true,
   },
-
   {
     slug: "digidirect-particular-audience",
     title: "Particular Audience Recommendations Integration",
@@ -135,6 +134,26 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    slug: "social-media-app",
+    title: "Social Media App",
+    description:
+      "A full-featured social media platform built with Next.js — posts, follows, likes, and a real-time feed.",
+    longDescription:
+      "Developed a full-stack social media application with Next.js App Router, featuring user authentication, a dynamic feed, post creation, likes, comments, and a follow system.",
+    tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Tailwind CSS"],
+    category: "nextjs",
+    highlights: [
+      "Full auth flow — sign up, login, protected routes",
+      "Dynamic feed with posts, likes, and nested comments",
+      "Follow / unfollow system with follower counts",
+      "Server components for SSR + client components for interactivity",
+      "Prisma ORM with PostgreSQL for type-safe database access",
+    ],
+    liveUrl: "https://social-app-henna-tau.vercel.app/",
+    repoUrl: "https://github.com/Rondel15/social-app",
+    featured: true,
+  },
+  {
     slug: "ai-powered-chat",
     title: "AI Powered Chat",
     description:
@@ -154,6 +173,26 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    slug: "advanced-node-chat-app",
+    title: "Real-time Chat App",
+    description:
+      "A full-stack real-time chat application built with Node.js, Socket.io, JWT authentication, and PostgreSQL — deployed on Render.",
+    longDescription:
+      "Built a production-ready real-time chat server from scratch using Node.js, Express, and Socket.io. Features JWT-based authentication for both HTTP routes and WebSocket connections, multi-room messaging with isolated streams, typing indicators, and message persistence via PostgreSQL. The frontend is a custom dark-themed UI served statically from the same Express server.",
+    tags: ["Node.js", "Socket.io", "WebSockets", "Express", "JWT", "PostgreSQL", "JavaScript"],
+    category: "node",
+    highlights: [
+      "JWT authentication middleware protecting both REST endpoints and WebSocket connections",
+      "Multi-room real-time messaging with Socket.io — join, leave, and isolated message streams",
+      "Message persistence with PostgreSQL — chat history survives server restarts",
+      "Typing indicators and live presence events via Socket.io room broadcasting",
+      "Single-server architecture — Express serves the frontend and Socket.io shares the HTTP port",
+    ],
+    liveUrl: "https://advanced-chat-app-render.onrender.com/",
+    repoUrl: "https://github.com/Rondel15/advanced-chat-app-render",
+    featured: true,
+  },
+  {
     slug: "node-chat-app",
     title: "Chat App",
     description:
@@ -170,26 +209,6 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://chat-app-client-s9cj.onrender.com/",
     repoUrl: "https://github.com/Rondel15/chat-app",
-    featured: true,
-  },
-  {
-    slug: "social-media-app",
-    title: "Social Media App",
-    description:
-      "A full-featured social media platform built with Next.js — posts, follows, likes, and a real-time feed.",
-    longDescription:
-      "Developed a full-stack social media application with Next.js App Router, featuring user authentication, a dynamic feed, post creation, likes, comments, and a follow system.",
-    tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Tailwind CSS"],
-    category: "nextjs",
-    highlights: [
-      "Full auth flow — sign up, login, protected routes",
-      "Dynamic feed with posts, likes, and nested comments",
-      "Follow / unfollow system with follower counts",
-      "Server components for SSR + client components for interactivity",
-      "Prisma ORM with PostgreSQL for type-safe database access",
-    ],
-    liveUrl: "https://social-app-henna-tau.vercel.app/",
-    repoUrl: "https://github.com/Rondel15/social-app",
     featured: true,
   },
 ];
