@@ -176,18 +176,18 @@ export const projects: Project[] = [
     slug: "kanban-task-manager",
     title: "Kanban Task Manager",
     description:
-      "A full-stack multi-user Kanban board with drag-and-drop, JWT authentication, role-based access, and persistent PostgreSQL storage.",
+      "A full-stack multi-user Kanban board with drag-and-drop, sprint burndown tracking, JWT authentication, and persistent PostgreSQL storage.",
     longDescription:
-      "Built a production-ready project management tool with React, TypeScript, and Node.js. Features multi-project support where each project has its own board and member group. The board supports drag-and-drop task management via @dnd-kit with optimistic UI updates, JWT-based authentication for both REST and client-side routes, and role-based access control enforced server-side. Includes a light/dark theme toggle with preference persistence.",
+      "Built a production-ready project management tool with React, TypeScript, and Node.js. Features multi-project support where each project has its own board, member group, and sprint dashboard. The dashboard displays a real-time burndown chart with daily snapshots, live stat cards, and overdue task tracking. The board supports drag-and-drop task management via @dnd-kit with optimistic UI updates. Secured with JWT authentication on both REST API routes and React Router pages, role-based access control enforced server-side, and a light/dark theme toggle with persisted preference.",
     tags: ["React", "TypeScript", "Node.js", "PostgreSQL", "Zustand", "DnD Kit", "Tailwind CSS", "JWT"],
     category: "react",
     highlights: [
+      "Sprint burndown chart with daily snapshots and ideal vs actual progress lines",
       "Drag-and-drop task cards across columns with optimistic UI via @dnd-kit",
-      "Multi-project support — each project has its own board and member group",
+      "Multi-project support — each project has its own board, sprint, and member group",
       "JWT authentication protecting both REST API routes and React Router pages",
       "Role-based access control — owner vs member enforced server-side",
       "Light/dark theme toggle with Zustand persist middleware",
-      "PostgreSQL persistence via Render — data survives deploys and restarts",
     ],
     liveUrl: "https://kanban-app-rose.vercel.app/",
     repoUrl: "https://github.com/Rondel15/kanban-app",
