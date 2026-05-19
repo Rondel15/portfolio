@@ -249,7 +249,7 @@ export const projects: Project[] = [
       "Exits with code 1 on findings — compatible with shell pipelines and monitoring scripts",
     ],
     repoUrl: "https://github.com/Rondel15/price-index-auditor",
-    featured: false,
+    featured: true,
   },
   {
     slug: "magento-price-rule-auditor",
@@ -268,7 +268,7 @@ export const projects: Project[] = [
       "Auto SSH tunnel for Adobe Commerce Cloud, email report with CSV attachment",
     ],
     repoUrl: "https://github.com/Rondel15/price-rule-auditor",
-    featured: false,
+    featured: true,
   },
 ];
 
