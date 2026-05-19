@@ -7,6 +7,7 @@ const categoryColors: Record<Project["category"], string> = {
   nextjs: "blue",
   react: "cyan",
   node: "green",
+  python: "yellow",
 };
 
 const categoryLabels: Record<Project["category"], string> = {
@@ -14,6 +15,7 @@ const categoryLabels: Record<Project["category"], string> = {
   nextjs: "Next.js",
   react: "React",
   node: "Node.js",
+  python: "Python",
 };
 
 export function ProjectCard({ project }: { project: Project }) {

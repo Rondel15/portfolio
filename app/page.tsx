@@ -9,6 +9,7 @@ const stack = [
   { label: "React", sub: "& TypeScript" },
   { label: "Node.js", sub: "REST & APIs" },
   { label: "PHP", sub: "8.x" },
+  { label: "Python", sub: "Automation & Tools" },
   { label: "MySQL", sub: "& Redis" },
 ];
 

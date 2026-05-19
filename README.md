@@ -43,7 +43,7 @@ Edit `lib/projects.ts`. Each project has:
 - `slug` — URL path (`/projects/your-slug`)
 - `title`, `description`, `longDescription`
 - `tags` — tech stack tags
-- `category` — `"magento" | "nextjs" | "react" | "node"`
+- `category` — `"magento" | "nextjs" | "react" | "node" | "python"`
 - `highlights` — bullet points shown on detail page
 - `liveUrl`, `repoUrl` — optional links
 - `featured` — shows on homepage if `true`

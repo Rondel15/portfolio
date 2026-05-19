@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Projects — Rondel",
-  description: "A selection of projects I've built across Magento 2, Next.js, React, and Node.js.",
+  description: "A selection of projects I've built across Magento 2, Next.js, React, Python and Node.js.",
 };
 
 export default function ProjectsPage() {

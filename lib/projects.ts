@@ -4,7 +4,7 @@ export type Project = {
   description: string;
   longDescription: string;
   tags: string[];
-  category: "magento" | "nextjs" | "react" | "node";
+  category: "magento" | "nextjs" | "react" | "node" | "python";
   highlights: string[];
   liveUrl?: string;
   repoUrl?: string;
@@ -231,6 +231,44 @@ export const projects: Project[] = [
     liveUrl: "https://chat-app-client-s9cj.onrender.com/",
     repoUrl: "https://github.com/Rondel15/chat-app",
     featured: true,
+  },
+  {
+    slug: "magento-price-index-auditor",
+    title: "Magento 2 Price Index Auditor",
+    description:
+      "A Python CLI tool that detects price mismatches between Magento 2's live and replica price index tables, with SSH tunnel support for Adobe Commerce Cloud environments.",
+    longDescription:
+      "Built a developer-focused audit tool that connects to Magento 2's MySQL database via an auto-managed SSH tunnel and compares all five price columns (price, final_price, min_price, max_price, tier_price) between catalog_product_index_price and its replica table. Mismatches are surfaced per entity_id, customer_group_id, and website_id — exactly the combination Magento uses for price resolution. Findings are reported in a colour-coded terminal table, emailed as a plain-text report with optional CSV attachment, and can trigger an SMS alert via Twilio.",
+    tags: ["Python", "MySQL", "Magento 2", "Adobe Commerce", "SSH", "Twilio", "SMTP"],
+    category: "python",
+    highlights: [
+      "Auto-managed SSH tunnel via sshtunnel — no manual port-forwarding needed for Adobe Commerce Cloud",
+      "Compares all five price columns per entity/group/website combination using Decimal for precision",
+      "Colour-coded terminal output with delta values per mismatched column",
+      "Email report with CSV attachment and optional Twilio SMS alert",
+      "Exits with code 1 on findings — compatible with shell pipelines and monitoring scripts",
+    ],
+    repoUrl: "https://github.com/Rondel15/price-index-auditor",
+    featured: false,
+  },
+  {
+    slug: "magento-price-rule-auditor",
+    title: "Magento 2 Price Rule Auditor",
+    description:
+      "A Python CLI tool that detects live Magento 2 products with zero or negative prices caused by misconfigured catalog price rules, and traces the responsible rule ID and name.",
+    longDescription:
+      "Built a diagnostic tool targeting one of the most damaging silent bugs in Magento 2 — products going live with a zero or negative final_price due to misconfigured catalog price rules. The tool queries catalog_product_index_price for enabled products with final_price <= 0, then traces each affected product back through catalogrule_product_price to the originating catalogrule rows — surfacing the rule_id, rule name, discount action, discount amount, and sort order. Supports SSH tunnelling for Adobe Commerce Cloud, terminal output with per-SKU rule breakdowns, CSV export, and email reports.",
+    tags: ["Python", "MySQL", "Magento 2", "Adobe Commerce", "SSH", "SMTP"],
+    category: "python",
+    highlights: [
+      "Detects zero and negative final_price on live (status=1) products only — no false positives from disabled products",
+      "Traces each affected SKU to its responsible catalogrule rows, including rule_id, name, action, and discount amount",
+      "Handles stacking rules — multiple rules per product are all listed with sort_order context",
+      "Flags products where the rule has since been deleted or expired (no matching catalogrule row)",
+      "Auto SSH tunnel for Adobe Commerce Cloud, email report with CSV attachment",
+    ],
+    repoUrl: "https://github.com/Rondel15/price-rule-auditor",
+    featured: false,
   },
 ];
 
