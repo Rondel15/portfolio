@@ -58,6 +58,10 @@
   background: #e8f5e9;
   color: #1b5e20;
 }
+.category[data-color="yellow"] {
+  background: #fffde7;
+  color: #f57f17;
+}
 
 [data-theme="dark"] .category[data-color="orange"] {
   background: rgba(230, 81, 0, 0.2);
@@ -74,6 +78,10 @@
 [data-theme="dark"] .category[data-color="green"] {
   background: rgba(27, 94, 32, 0.2);
   color: #81c784;
+}
+[data-theme="dark"] .category[data-color="yellow"] {
+  background: rgba(245, 127, 23, 0.2);
+  color: #ffd54f;
 }
 
 .arrow {
