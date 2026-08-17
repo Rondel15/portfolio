@@ -76,6 +76,10 @@
     ) {
       element.style.position = "relative";
     }
+    
+    const label =
+      element.getAttribute("data-label") ||
+      block;
 
     const badge =
       document.createElement("a");
@@ -88,6 +92,9 @@
 
     badge.target =
       "_blank";
+
+    badge.title =
+      label;
 
     badge.innerHTML =
       `↗ HMC`;
