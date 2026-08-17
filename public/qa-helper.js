@@ -9,9 +9,9 @@
 
   const HMC_BASE = "https://ecom-admin.nespresso.com/hmc?open=";
 
-  const pks = [
+  const blocks = [
     ...new Set(
-      document.documentElement.outerHTML.match(/\d{13}/g) || []
+      document.documentElement.outerHTML.match(/block-\d{13}/g) || []
     )
   ];
 
@@ -22,14 +22,14 @@
     position:fixed;
     top:20px;
     right:20px;
-    width:520px;
+    width:540px;
     height:80vh;
     background:#fff;
     border-radius:12px;
     overflow:hidden;
     box-shadow:0 12px 40px rgba(0,0,0,.25);
     z-index:999999999;
-    font-family:Segoe UI,Arial,sans-serif;
+    font-family:'Segoe UI',Arial,sans-serif;
     border:1px solid #ddd;
   `;
 
@@ -51,38 +51,37 @@
         </div>
 
         <div style="
-            font-size:11px;
-            color:#aaa;
-            margin-top:2px;">
-            ${pks.length} PKs Found
+          font-size:11px;
+          color:#aaa;
+          margin-top:2px;
+        ">
+          ${blocks.length} Blocks Found
         </div>
       </div>
 
       <div>
-
         <button id="copyAll"
-        style="
+          style="
             cursor:pointer;
             padding:6px 10px;
             border:0;
             border-radius:6px;
             margin-right:8px;
             background:#fff;
-        ">
+          ">
           Copy All
         </button>
 
         <button id="closeQA"
-        style="
+          style="
             cursor:pointer;
             border:0;
             background:none;
             color:white;
             font-size:20px;
-        ">
+          ">
           ×
         </button>
-
       </div>
     </div>
 
@@ -91,19 +90,17 @@
       border-bottom:1px solid #eee;
       background:#f8f8f8;
     ">
-
       <input
-       id="qaSearch"
-       placeholder="Search PK..."
-       style="
-        width:100%;
-        padding:10px;
-        border-radius:8px;
-        border:1px solid #ddd;
-        box-sizing:border-box;
-       "
+        id="qaSearch"
+        placeholder="Search block..."
+        style="
+          width:100%;
+          padding:10px;
+          border-radius:8px;
+          border:1px solid #ddd;
+          box-sizing:border-box;
+        "
       >
-
     </div>
 
     <div
@@ -112,146 +109,224 @@
         height:calc(100% - 120px);
         overflow:auto;
         padding:12px;
+        background:#fafafa;
       ">
     </div>
   `;
 
   document.body.appendChild(panel);
 
-  const list = document.getElementById("qaList");
-
-  pks.forEach(pk => {
-
-    const row = document.createElement("div");
-
-    row.className = "qa-row";
-
-    row.dataset.pk = pk;
-
-    row.style.cssText = `
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:10px;
-      border:1px solid #eee;
-      border-radius:8px;
-      margin-bottom:8px;
-      transition:.2s;
-      background:white;
-    `;
-
-    row.onmouseenter = () =>
-      row.style.background = "#f5f5f5";
-
-    row.onmouseleave = () =>
-      row.style.background = "#fff";
-
-    row.innerHTML = `
-      <div>
-
-        <div style="
-          font-weight:600;
-          font-size:13px;
-        ">
-          ${pk}
-        </div>
-
-        <div style="
-          color:#888;
-          font-size:11px;
-          margin-top:2px;
-        ">
-          Page Builder / CMS Object
-        </div>
-
-      </div>
-
-      <div>
-
-        <a
-         href="${HMC_BASE}${pk}"
-         target="_blank"
-         style="
-          text-decoration:none;
-          padding:6px 10px;
-          background:#111;
-          color:white;
-          border-radius:6px;
-          font-size:12px;
-          margin         background:white;
-          "
-        >
-          Copy
-        </button>
-
-      </div>
-    `;
-
-    list.appendChild(row);
-
-  });
-
   document.getElementById("closeQA").onclick =
     () => panel.remove();
 
   document.getElementById("copyAll").onclick =
-    () => navigator.clipboard.writeText(
-      pks.join("\n")
-    );
+    () => {
+      navigator.clipboard.writeText(
+        blocks.map(b => b.replace("block-", "")).join("\n")
+      );
+    };
 
-  document.querySelectorAll(".copyBtn")
-    .forEach(btn => {
+  const list =
+    document.getElementById("qaList");
 
-      btn.onclick = () => {
+  blocks.forEach(block => {
 
-        navigator.clipboard.writeText(
-          btn.dataset.pk
+    const pk =
+      block.replace("block-", "");
+
+    const blockElement =
+      [...document.querySelectorAll("*")]
+        .find(el =>
+          (el.outerHTML || "")
+            .includes(block)
         );
 
-        btn.innerText = "Copied";
+    const title =
+      blockElement
+        ?.querySelector(
+          "h1,h2,h3,h4,h5,h6"
+        )
+        ?.innerText
+        ?.trim()
+      || "Untitled Block";
 
-        setTimeout(() => {
-          btn.innerText = "Copy";
-        }, 1000);
+    const image =
+      blockElement
+        ?.querySelector("img");
 
-      };
+    const cta =
+      [...(
+        blockElement
+          ?.querySelectorAll("a")
+        || []
+      )]
+      .map(a =>
+        a.innerText.trim()
+      )
+      .find(Boolean)
+      || "";
 
-    });
+    const preview =
+      (
+        blockElement?.innerText
+        || ""
+      )
+      .replace(/\s+/g, " ")
+      .trim()
+      .substring(0, 150);
 
-  document.getElementById("qaSearch")
+    const card =
+      document.createElement("a");
+
+    card.className =
+      "qa-row";
+
+    card.dataset.pk = block;
+
+    card.href =
+      `${HMC_BASE}${pk}`;
+
+    card.target =
+      "_blank";
+
+    card.style.cssText = `
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      text-decoration:none;
+      color:#111;
+      padding:12px;
+      margin-bottom:10px;
+      background:white;
+      border:1px solid #e8e8e8;
+      border-radius:10px;
+      transition:.15s;
+      cursor:pointer;
+    `;
+
+    card.onmouseenter = () => {
+      card.style.background =
+        "#f5f5f5";
+      card.style.borderColor =
+        "#cfcfcf";
+    };
+
+    card.onmouseleave = () => {
+      card.style.background =
+        "#fff";
+      card.style.borderColor =
+        "#e8e8e8";
+    };
+
+    card.innerHTML = `
+      ${
+        image
+        ? `
+          <img
+            src="${image.src}"
+            style="
+              width:72px;
+              height:72px;
+              object-fit:cover;
+              border-radius:8px;
+              flex-shrink:0;
+            "
+           ">
+          </div>
+        `
+      }
+
+      <div style="flex:1">
+
+        <div style="
+          color:#8C6A00;
+          font-weight:700;
+          font-size:12px;
+          margin-bottom:4px;
+        ">
+          ${block}
+        </div>
+
+        <div style="
+          font-size:14px;
+          font-weight:600;
+          margin-bottom:6px;
+        ">
+          ${title}
+        </div>
+
+        ${
+          cta
+          ? `
+          <div style="
+            font-size:11px;
+            color:#0078d4;
+            margin-bottom:6px;
+          ">
+            CTA: ${cta}
+          </div>
+          `
+          : ""
+        }
+
+        <div style="
+          font-size:11px;
+          color:#666;
+          line-height:1.4;
+        ">
+          ${preview}
+        </div>
+
+      </div>
+    `;
+
+    list.appendChild(card);
+  });
+
+  document
+    .getElementById("qaSearch")
     .addEventListener("input", e => {
 
       const value =
-        e.target.value.toLowerCase();
+        e.target.value
+          .toLowerCase();
 
       document
-      .querySelectorAll(".qa-row")
-      .forEach(row => {
+        .querySelectorAll(".qa-row")
+        .forEach(row => {
 
-        row.style.display =
-          row.dataset.pk.includes(value)
-          ? ""
-          : "none";
+          row.style.display =
+            row.innerText
+              .toLowerCase()
+              .includes(value)
+            ? ""
+            : "none";
 
-      });
+        });
 
     });
 
   // draggable
-
   const header =
-    document.getElementById("nsqa-header");
+    document.getElementById(
+      "nsqa-header"
+    );
 
   let drag = false;
-  let x = 0;
-  let y = 0;
+  let posX = 0;
+  let posY = 0;
 
   header.onmousedown = e => {
 
     drag = true;
 
-    x = e.clientX - panel.offsetLeft;
-    y = e.clientY - panel.offsetTop;
+    posX =
+      e.clientX -
+      panel.offsetLeft;
+
+    posY =
+      e.clientY -
+      panel.offsetTop;
 
   };
 
@@ -263,12 +338,13 @@
     if (!drag) return;
 
     panel.style.left =
-      (e.clientX - x) + "px";
+      e.clientX - posX + "px";
 
     panel.style.top =
-      (e.clientY - y) + "px";
+      e.clientY - posY + "px";
 
-    panel.style.right = "auto";
+    panel.style.right =
+      "auto";
 
   };
 
