@@ -221,20 +221,19 @@
     card.innerHTML = `
       ${
         image
-        ? `
-          <img
-            src="${image.src}"
-            style="
-              width:72px;
-              height:72px;
-              object-fit:cover;
-              border-radius:8px;
-              flex-shrink:0;
-            "
-           ">
-          </div>
-        `
-      }
+            ? `
+            <img
+                src="${image.src}"
+                style="
+                width:72px;
+                height:72px;
+                object-fit:cover;
+                border-radius:8px;
+                flex-shrink:rink:0;
+                "
+            >
+            ` : ''
+        }
 
       <div style="flex:1">
 
