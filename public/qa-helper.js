@@ -20,18 +20,29 @@
 
   // Build a lookup of the smallest element containing each block ID,
   // in a single pass over the DOM instead of re-scanning per block.
+  // A block ID may appear in text content OR in an attribute
+  // (e.g. data-block-id, class, href), so check both.
   const targets = new Map(); // block -> element (smallest match so far)
+
+  const elementContainsBlock = (el, block) => {
+
+    if ((el.textContent || "").includes(block)) return true;
+
+    for (const attr of el.attributes) {
+      if (attr.value.includes(block)) return true;
+    }
+
+    return false;
+
+  };
 
   const allElements = document.querySelectorAll("*");
 
   allElements.forEach(el => {
 
-    // Only consider leaf-ish elements first; walk up only if needed.
-    const text = el.textContent || "";
-
     blocks.forEach(block => {
 
-      if (!text.includes(block)) return;
+      if (!elementContainsBlock(el, block)) return;
 
       const current = targets.get(block);
 
