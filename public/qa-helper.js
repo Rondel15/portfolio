@@ -95,7 +95,7 @@
     badge.style.cssText = `
       position:absolute;
       top:8px;
-      right:8px;
+      left:8px;
       z-index:9999;
       background:#000;
       color:#fff;
