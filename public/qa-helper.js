@@ -1,28 +1,34 @@
 (function () {
+
   const PANEL_ID = "ns-qa-helper";
 
   const existing = document.getElementById(PANEL_ID);
+
   if (existing) {
     existing.remove();
     return;
   }
 
-  const HMC_BASE = "https://ecom-admin.nespresso.com/hmc?open=";
+  const HMC_BASE =
+    "https://ecom-admin.nespresso.com/hmc?open=";
 
   const blocks = [
     ...new Set(
-      document.documentElement.outerHTML.match(/block-\d{13}/g) || []
+      document.documentElement.outerHTML.match(
+        /block-\d{13}/g
+      ) || []
     )
   ];
 
   const panel = document.createElement("div");
+
   panel.id = PANEL_ID;
 
   panel.style.cssText = `
     position:fixed;
     top:20px;
     right:20px;
-    width:540px;
+    width:420px;
     height:80vh;
     background:#fff;
     border-radius:12px;
@@ -34,7 +40,8 @@
   `;
 
   panel.innerHTML = `
-    <div id="nsqa-header"
+    <div
+      id="nsqa-header"
       style="
         background:#111;
         color:white;
@@ -43,53 +50,55 @@
         justify-content:space-between;
         align-items:center;
         cursor:move;
-      ">
+      "
+    >
 
       <div>
-        <div style="font-size:16px;font-weight:600">
+
+        <div
+          style="
+            font-size:16px;
+            font-weight:600;
+          "
+        >
           ☕ Nespresso QA Helper
         </div>
 
-        <div style="
-          font-size:11px;
-          color:#aaa;
-          margin-top:2px;
-        ">
+        <div
+          style="
+            font-size:11px;
+            color:#aaa;
+            margin-top:2px;
+          "
+        >
           ${blocks.length} Blocks Found
         </div>
+
       </div>
 
-      <div>
-        <button id="copyAll"
-          style="
-            cursor:pointer;
-            padding:6px 10px;
-            border:0;
-            border-radius:6px;
-            margin-right:8px;
-            background:#fff;
-          ">
-          Copy All
-        </button>
+      <button
+        id="closeQA"
+        style="
+          cursor:pointer;
+          border:0;
+          background:none;
+          color:white;
+          font-size:20px;
+        "
+      >
+        ×
+      </button>
 
-        <button id="closeQA"
-          style="
-            cursor:pointer;
-            border:0;
-            background:none;
-            color:white;
-            font-size:20px;
-          ">
-          ×
-        </button>
-      </div>
     </div>
 
-    <div style="
-      padding:12px;
-      border-bottom:1px solid #eee;
-      background:#f8f8f8;
-    ">
+    <div
+      style="
+        padding:12px;
+        border-bottom:1px solid #eee;
+        background:#f8f8f8;
+      "
+    >
+
       <input
         id="qaSearch"
         placeholder="Search block..."
@@ -101,79 +110,29 @@
           box-sizing:border-box;
         "
       >
+
     </div>
 
     <div
       id="qaList"
       style="
-        height:calc(100% - 120px);
         overflow:auto;
+        height:calc(100% - 110px);
         padding:12px;
         background:#fafafa;
-      ">
-    </div>
+      "
+    ></div>
   `;
 
   document.body.appendChild(panel);
 
-  document.getElementById("closeQA").onclick =
-    () => panel.remove();
-
-  document.getElementById("copyAll").onclick =
-    () => {
-      navigator.clipboard.writeText(
-        blocks.map(b => b.replace("block-", "")).join("\n")
-      );
-    };
-
   const list =
     document.getElementById("qaList");
 
-  blocks.forEach(block => {
+  blocks.sort().forEach(block => {
 
     const pk =
       block.replace("block-", "");
-
-    const blockElement =
-      [...document.querySelectorAll("*")]
-        .find(el =>
-          (el.outerHTML || "")
-            .includes(block)
-        );
-
-    const title =
-      blockElement
-        ?.querySelector(
-          "h1,h2,h3,h4,h5,h6"
-        )
-        ?.innerText
-        ?.trim()
-      || "Untitled Block";
-
-    const image =
-      blockElement
-        ?.querySelector("img");
-
-    const cta =
-      [...(
-        blockElement
-          ?.querySelectorAll("a")
-        || []
-      )]
-      .map(a =>
-        a.innerText.trim()
-      )
-      .find(Boolean)
-      || "";
-
-    const preview =
-      (
-        blockElement?.innerText
-        || ""
-      )
-      .replace(/\s+/g, " ")
-      .trim()
-      .substring(0, 150);
 
     const card =
       document.createElement("a");
@@ -181,22 +140,20 @@
     card.className =
       "qa-row";
 
-    card.dataset.pk = block;
+    card.dataset.pk =
+      block.toLowerCase();
 
-    card.href =
-      `${HMC_BASE}${pk}`;
+    card.href = `${HMC_BASE}${pk}`;
 
     card.target =
       "_blank";
 
     card.style.cssText = `
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
+      display:block;
       text-decoration:none;
       color:#111;
       padding:12px;
-      margin-bottom:10px;
+      margin-bottom:8px;
       background:white;
       border:1px solid #e8e8e8;
       border-radius:10px;
@@ -219,85 +176,59 @@
     };
 
     card.innerHTML = `
-      ${
-        image
-            ? `
-            <img
-                src="${image.src}"
-                style="
-                width:72px;
-                height:72px;
-                object-fit:cover;
-                border-radius:8px;
-                flex-shrink:rink:0;
-                "
-            >
-            ` : ''
-        }
-
-      <div style="flex:1">
-
-        <div style="
-          color:#8C6A00;
+      <div
+        style="
+          color:#B8860B;
           font-weight:700;
-          font-size:12px;
+          font-size:13px;
           margin-bottom:4px;
-        ">
-          ${block}
-        </div>
+        "
+      >
+        ${block}
+      </div>
 
-        <div style="
-          font-size:14px;
-          font-weight:600;
-          margin-bottom:6px;
-        ">
-          ${title}
-        </div>
-
-        ${
-          cta
-          ? `
-          <div style="
-            font-size:11px;
-            color:#0078d4;
-            margin-bottom:6px;
-          ">
-            CTA: ${cta}
-          </div>
-          `
-          : ""
-        }
-
-        <div style="
+      <div
+        style="
           font-size:11px;
-          color:#666;
-          line-height:1.4;
-        ">
-          ${preview}
-        </div>
+          color:#777;
+        "
+      >
+        PK: ${pk}
+      </div>
 
+      <div
+        style="
+          margin-top:6px;
+          color:#0078d4;
+          font-size:11px;
+        "
+      >
+        Open in HMC →
       </div>
     `;
 
     list.appendChild(card);
+
   });
+
+  document
+    .getElementById("closeQA")
+    .onclick = () =>
+      panel.remove();
 
   document
     .getElementById("qaSearch")
     .addEventListener("input", e => {
 
       const value =
-        e.target.value
-          .toLowerCase();
+        e.target.value.toLowerCase();
 
       document
         .querySelectorAll(".qa-row")
-        .forEach(row => {
+        .forEach(card => {
 
-          row.style.display =
-            row.innerText
-              .toLowerCase()
-              .includes(value)
+          card.style.display =
+            card.dataset.pk.includes(value)
             ? ""
             : "none";
 
@@ -305,42 +236,41 @@
 
     });
 
-  // draggable
   const header =
-    document.getElementById(
-      "nsqa-header"
-    );
+    document.getElementById("nsqa-header");
 
   let drag = false;
-  let posX = 0;
-  let posY = 0;
+  let offsetX = 0;
+  let offsetY = 0;
 
   header.onmousedown = e => {
 
     drag = true;
 
-    posX =
+    offsetX =
       e.clientX -
       panel.offsetLeft;
 
-    posY =
+    offsetY =
       e.clientY -
       panel.offsetTop;
 
   };
 
-  document.onmouseup = () =>
-    drag = false;
+  document.onmouseup =
+    () => drag = false;
 
   document.onmousemove = e => {
 
     if (!drag) return;
 
     panel.style.left =
-      e.clientX - posX + "px";
+      e.clientX - offsetX +
+      "px";
 
     panel.style.top =
-      e.clientY - posY + "px";
+      e.clientY - offsetY +
+      "px";
 
     panel.style.right =
       "auto";
