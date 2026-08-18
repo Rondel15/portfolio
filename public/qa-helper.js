@@ -9,7 +9,7 @@
   }
 
   const HMC_BASE =
-    "https://ecom-admin.nespresso.com/hmc?open=";
+    "https://ecom-admin.nespresso.com/hmc/hybris?open=";
 
   const blocks =
     [...new Set(
