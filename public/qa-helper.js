@@ -8,6 +8,16 @@
     return;
   }
 
+  // Inject required CSS
+  if (!document.getElementById('ns-hmc-styles')) {
+    const style = document.createElement('style');
+    style.id = 'ns-hmc-styles';
+    style.textContent = `
+      .free-html { min-height: 32px; }
+    `;
+    document.head.appendChild(style);
+  }
+
   const HMC_BASE =
     "https://ecom-admin.nespresso.com/hmc/hybris?open=";
 
