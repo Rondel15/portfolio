@@ -4,6 +4,7 @@
  *
  *   ?m=watch  -> watch this HMC window and every popup it opens; ask to reveal cut-off tables
  *   ?m=once   -> check just the current window (and its same-origin frames), ask, reveal / undo
+ *   ?m=now    -> no question: reveal immediately; run again to undo (for pasting in the F12 console)
  *
  * Settings (AUTO_REVEAL, MAX_COL_PX, TABLE_SEL, HOTKEY) are at the top of core().
  */
@@ -12,7 +13,7 @@
 
   /* ======================= core: the check + pop-up + reveal =======================
      Kept as one self-contained function so "watch" mode can serialize it into other windows. */
-  function core(MANUAL) {
+  function core(MANUAL, NOW) {
 
     'use strict';
 
@@ -206,8 +207,10 @@
       const docs = collectDocs();
       const { withTables, clipped } = scan(docs);
       const ui = uiDocFor(docs, withTables[0]);
-      if (docs.some(isOn))          showUi(ui, 'The table is currently revealed.', [['Undo', () => undo(docs, ui)], ['Close', null, 'primary']]);
+      if (NOW && docs.some(isOn))   undo(docs, ui);
+      else if (docs.some(isOn))          showUi(ui, 'The table is currently revealed.', [['Undo', () => undo(docs, ui)], ['Close', null, 'primary']]);
       else if (!withTables.length)  showUi(ui, 'No list table found on this page.', [['Close', null, 'primary']], 4000);
+      else if (NOW)                 reveal(docs, ui);
       else if (!clipped)            showUi(ui, 'No cut-off content detected.', [['Reveal anyway', () => reveal(docs, ui)], ['Close', null, 'primary']]);
       else                          ask(docs, ui);
       return;
@@ -237,9 +240,9 @@
 
   /* ======================= entry point ======================= */
   let mode = 'watch';
-  try { mode = new URL(document.currentScript.src).searchParams.get('m') === 'once' ? 'once' : 'watch'; } catch (_) {}
+  try { const m = new URL(document.currentScript.src).searchParams.get('m'); if (m === 'once' || m === 'now') mode = m; } catch (_) {}
 
-  if (mode === 'once') { core(true); return; }
+  if (mode === 'once' || mode === 'now') { core(true, mode === 'now'); return; }
 
   /* ---------- watch mode ---------- */
   const SRC = '(' + core.toString() + ')(false);';
